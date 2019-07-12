@@ -17,13 +17,15 @@ class Main extends React.Component {
     const data = new FormData();
     data.append('file', this.uploadInput.files[0]);
     data.append('filename', this.fileName.value);
-
-    fetch('http://localhost:8000/upload', {
+    // http://127.0.0.1:5000/upload
+    // fetch('http://35.183.208.30:5000/upload', {
+    fetch('http://35.182.16.63:5001/upload', {
       method: 'POST',
       body: data,
     }).then((response) => {
       response.json().then((body) => {
-        this.setState({ imageURL: `http://localhost:8000/${body.file}` });
+        // this.setState({ imageURL: `http://35.183.208.30:5000/${body.file}` });
+        this.setState({ imageURL: `http://35.182.16.63:5001/${body.category}` });
       });
     });
   }
@@ -41,7 +43,8 @@ class Main extends React.Component {
         <div>
           <button>Upload</button>
         </div>
-        <img src={this.state.imageURL} alt="img" />
+
+        <p>{this.state.imageURL}</p> 
       </form>
     );
   }
